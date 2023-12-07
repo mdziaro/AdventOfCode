@@ -13,7 +13,7 @@ print(dane)
 
 print(len(dane))
 print(len(dane[0]))
-wynik = 0
+gears = []
 flag = 0
 for i in range(0, len(dane)):
     number = 0
@@ -32,13 +32,19 @@ for i in range(0, len(dane)):
         if number != 0:
             for k in range(0, 3):
                 for l in range(0, len(str(number))+2):
-                    if not dane[i+k-1][j+l-1].isdigit() and not dane[i+k-1][j+l-1] == ".":
+                    if dane[i+k-1][j+l-1] == "*":
+                        gears.append([number, (i+k-1, j+l-1)])
                         flag = 1
             if flag == 1:
-                wynik += number
-                flag = 0
-            number = 0
-        
                 
+                flag = 0
+            number = 0       
 
+print(gears)
+wynik = 0
+
+for i in range(len(gears)-1):
+    for j in range(i+1, len(gears)):
+        if gears[i][1] == gears[j][1]:
+            wynik += gears[i][0] * gears[j][0]
 print(wynik)
